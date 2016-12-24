@@ -37,7 +37,17 @@ findK k lc = findK (k-1) (tail lc)
 
 
 -- Determine if list l is a palindrome
+
+isPalindromeString :: [Char] -> Bool
+isPalindromeString [] = True
+isPalindromeString [x,y,z] = x == z 
+isPalindromeString l = head l == last l && isPalindromeString (tail(init l))
+
+--isPalindrome :: Eq a => [a]
 --isPalindrome l = undefined
+
+
+
 {-
  - Duplicate the elements in list xs, for example "duplicate [1,2,3]" would give the list [1,1,2,2,3,3]
  - Hint: The "concat [l]" function flattens a list of lists into a single list. 
