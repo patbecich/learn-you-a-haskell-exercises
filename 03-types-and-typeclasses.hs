@@ -7,10 +7,10 @@
  - Have a play with the Colour in ghci, try the succ and pred functions and so on.
  -}
 data Colour = Red | Orange | Yellow | Green | Blue | Indigo | Violet
-    deriving (Eq, Ord, Show, Bounded, Enum)   
+    deriving (Eq, Ord, Show, Bounded, Enum)
 
 {-
- - Again, you should be able to write these functions in one line, 
+ - Again, you should be able to write these functions in one line,
  - using the information from the chapter http://learnyouahaskell.com/types-and-typeclasses
  - and the chapter before
  -}
@@ -19,10 +19,12 @@ data Colour = Red | Orange | Yellow | Green | Blue | Indigo | Violet
  - The Colour typeclass is of type Ord
  - What is the "first" (or least) colour
  -}
-firstColour = undefined
+firstColour = minBound :: Colour
+
+--allColours =
 
 -- List the colours in reverse order
-reverseColourOrder = undefined
+--reverseColourOrder = firstColour:[succ firstColour]
 
 {-
  - Mix two colours together, to produce the average value of the two.
