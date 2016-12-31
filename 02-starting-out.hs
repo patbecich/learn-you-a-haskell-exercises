@@ -26,11 +26,11 @@ foo :: Int -> Int -> Int -> Int
 foo a b c = a+b+c
 
 findKChar :: Integer -> [Char] -> Char
-findKChar 0 lc = head lc         
+findKChar 0 lc = head lc
 findKChar k lc = findKChar (k-1) (tail lc)
 
 findK :: Integer -> [a] -> a
-findK 0 lc = head lc         
+findK 0 lc = head lc
 findK k lc = findK (k-1) (tail lc)
 
 --findKChar k lc = (((findKChar k) -1) (tail lc)) -- bad order of operations
@@ -40,7 +40,7 @@ findK k lc = findK (k-1) (tail lc)
 
 isPalindromeString :: [Char] -> Bool
 isPalindromeString [] = True
-isPalindromeString [x,y,z] = x == z 
+isPalindromeString [x,y,z] = x == z
 isPalindromeString l = head l == last l && isPalindromeString (tail(init l))
 
 --isPalindrome :: Eq a => [a]
@@ -50,23 +50,41 @@ isPalindromeString l = head l == last l && isPalindromeString (tail(init l))
 
 {-
  - Duplicate the elements in list xs, for example "duplicate [1,2,3]" would give the list [1,1,2,2,3,3]
- - Hint: The "concat [l]" function flattens a list of lists into a single list. 
+ - Hint: The "concat [l]" function flattens a list of lists into a single list.
  - (You can see the function definition by typing ":t concat" into the interpreter. Perhaps try this with other variables and functions)
  -
  - For example: concat [[1,2,3],[3,4,5]] returns [1,2,3,3,4,5]
  -}
---duplicate xs = undefined
+duplicate :: [a] -> [a]
+duplicate []     = []
+duplicate (x:xs) = concat [[x,x],duplicate xs]
+
+
+zipWith' :: (a -> b -> c) -> [a] -> [b] -> [c]
+zipWith' _ [] _          = []
+zipWith' _ _ []          = []
+zipWith' f (x:xs) (y:ys) = f x y : zipWith' f xs ys
 
 {-
  - Imitate the functinality of zip
  - The function "min x y" returns the lower of values x and y
  - For example "ziplike [1,2,3] ['a', 'b', 'c', 'd']" returns [(1,'a'), (2, 'b'), (3, 'c')]
  -}
---ziplike xs ys = undefined
+tupler :: a -> b -> (a,b)
+tupler x y = (x,y)
+
+
+zipLike :: [a] -> [b] -> [(a,b)]
+zipLike xs ys = zipWith' tupler xs ys
+
 
 -- Split a list l at element k into a tuple: The first part up to and including k, the second part after k
 -- For example "splitAtIndex 3 [1,1,1,2,2,2]" returns ([1,1,1],[2,2,2])
 --splitAtIndex k l = undefined
+
+
+
+
 
 -- Drop the element at index k in list l
 -- For example "dropK 3 [0,0,0,1,0,0,0]" returns [0,0,0,0,0,0]
