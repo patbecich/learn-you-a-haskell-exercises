@@ -2,24 +2,24 @@
 -- Example: sumInts 0 1 = 1
 --          sumInts 1 3 = 6
 sumInts :: Int -> Int -> Int
-sumInts a b = undefined
+sumInts a b = foldl (\acc x -> acc + x) 0 [a..b]
 
 -- Define a square function
 sq :: Int -> Int
-sq x = undefined
+sq x = x*x
 
 -- Sum the squares between two numbers. This function should be similar to the sumInts function
 sumSquares :: Int -> Int -> Int
-sumSquares a b = undefined
+sumSquares a b = sq a + sq b
 
 -- Define a higher order sum function which accepts an (Int -> Int) function to apply to all integers between two values.
 -- Again this should look similar to the sumInts and sumSquares functions
 higherOrderSum :: (Int -> Int) -> Int -> Int -> Int
-higherOrderSum intApplication a b = undefined
+higherOrderSum intApplication x y = foldl (\acc x -> acc + intApplication x) 0 [x..y]
 
 -- Define the square sum in terms of higherOrderSum
 hoSumSquares :: Int -> Int -> Int
-hoSumSquares = undefined
+hoSumSquares x y = higherOrderSum sq x y
 
 -- Define the sum between two values in terms of higherOrderSum
 -- Note there is no parameter on the function definition
