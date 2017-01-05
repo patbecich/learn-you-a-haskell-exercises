@@ -12,9 +12,16 @@
  - Uncomment the following declarations to complete the implementation, and provide an implementation for instance Show Card
  -}
 
---data Suit = 
---data Digit = 
---data Card = 
+data Suit = Spades | Hearts | Diamonds | Clubs
+  deriving (Show, Ord, Eq)
+data Digit = Two | Three | Four | Five | Six | Seven | Eight | Nine | Ten | Jack | Queen | King | Ace
+  deriving (Show, Ord, Eq)
+data Card = Card Digit Suit
+  deriving (Ord, Eq)
+
+instance Show Card where
+  show (Card digit suit) = "The "++show digit++" of "++show suit
+
 
 -- We should be able to provide a function which returns the higher ranked card:
 betterCard :: Card -> Card -> Card
@@ -30,10 +37,10 @@ instance Hand Card where
     play c = undefined
 
 -- Create a new Coin type
---data Coin = 
+--data Coin =
 
 -- Implement Hand for Coin, where play returns true if there are ten heads in a row in the list
-instance Hand Coin where
-	play c =  undefined
+--instance Hand Coin where
+--	play c =  undefined
 
 -- Have a play with implementing Hand for some other types, for instance Int and Bool
