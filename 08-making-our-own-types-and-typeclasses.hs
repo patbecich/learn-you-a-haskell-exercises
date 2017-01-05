@@ -25,7 +25,9 @@ instance Show Card where
 
 -- We should be able to provide a function which returns the higher ranked card:
 betterCard :: Card -> Card -> Card
-betterCard x y = undefined
+betterCard x y
+  | x < y = y
+  | otherwise = x
 
 -- Here is a new Typeclass, which represents some kind of playing hand in a game.
 -- It returns True for a "winning hand", depending on the rules for the type of class we are playing with
@@ -34,13 +36,20 @@ class Hand a where
 
 -- Implement Hand for Card, where play returns true if the list contains the Ace of Spades
 instance Hand Card where
-    play c = undefined
+    play listCard = Card Ace Spades `elem` listCard
+
+testCard = Card Ace Spades
+testCard2 = Card King Spades
+
+testCardList = [testCard, testCard2]
 
 -- Create a new Coin type
---data Coin =
+
+data Coin = Heads | Tails
 
 -- Implement Hand for Coin, where play returns true if there are ten heads in a row in the list
+
 --instance Hand Coin where
---	play c =  undefined
+--	play listOfCoins =
 
 -- Have a play with implementing Hand for some other types, for instance Int and Bool
