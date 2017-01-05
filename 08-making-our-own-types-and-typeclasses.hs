@@ -45,11 +45,26 @@ testCardList = [testCard, testCard2]
 
 -- Create a new Coin type
 
-data Coin = Heads | Tails
+data Coin = Heads | Tails deriving (Eq)
 
 -- Implement Hand for Coin, where play returns true if there are ten heads in a row in the list
 
---instance Hand Coin where
---	play listOfCoins =
+
+foldCoin :: (Int, Bool) -> Coin -> (Int, Bool)
+foldCoin (headCount, tenConsecutiveHeads) nextCoin
+         | nextCoin == Heads && headCount >= 9 = (headCount + 1, True)
+         | nextCoin == Heads = (headCount + 1, False)
+         | nextCoin == Tails = (0, tenConsecutiveHeads)
+
+instance Hand Coin where
+    play listOfCoins = snd $ foldl foldCoin (0, False) listOfCoins
+
+listCoins1 = [Heads, Tails, Heads, Tails, Heads, Tails, Heads, Tails, Heads, Heads, Heads]
+
+listCoins2 = [Heads, Heads, Heads, Heads, Heads, Heads, Heads, Heads, Heads, Heads, Heads, Heads ]
+
+listCoins3 = [Heads, Heads, Heads, Tails, Heads, Heads, Heads, Heads, Heads, Heads, Heads, Heads ]
+
+listCoins4 = [Heads, Heads, Heads, Tails, Heads, Heads, Heads, Heads, Heads, Heads, Heads, Heads, Heads, Heads, Heads ]
 
 -- Have a play with implementing Hand for some other types, for instance Int and Bool
